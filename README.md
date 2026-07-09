@@ -1,1 +1,1 @@
-# jadwal-kuliah-msim-gasal-2025-2026
+# jadwal-kuliah-msim-genap-2025-2026
