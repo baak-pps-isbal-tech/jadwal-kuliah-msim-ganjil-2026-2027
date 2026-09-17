@@ -551,6 +551,46 @@
         font-weight: 500;
     }
 
+    .class-button.concentration {
+        border-color: #c4b5fd;
+        background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+    }
+
+    .class-button.concentration:hover {
+        border-color: #8b5cf6;
+        color: #6d28d9;
+    }
+
+    .class-button.concentration.active {
+        border-color: #6d28d9;
+        background: linear-gradient(135deg, #7c3aed, #5b21b6);
+        color: white;
+    }
+
+    .concentration-badge {
+        display: block;
+        width: fit-content;
+        margin: 4px auto 0;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: #ede9fe;
+        color: #6d28d9;
+        font-size: 0.56rem;
+        line-height: 1.2;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .class-button.concentration.active .concentration-badge {
+        background: rgba(255, 255, 255, 0.20);
+        color: white;
+    }
+
+    .class-navigation.has-selection {
+        position: relative;
+        top: auto;
+    }
+
     .quick-access {
         display: flex;
         justify-content: center;
@@ -1191,10 +1231,10 @@
             <div class="semester-buttons">
                 <button class="class-button" data-tab="sim3a" onclick="showTab('sim3a', this)">SIM3A</button>
                 <button class="class-button" data-tab="sim3b" onclick="showTab('sim3b', this)">SIM3B</button>
-                <button class="class-button" data-tab="sim3pd" onclick="showTab('sim3pd', this)">SIM3PD</button>
-                <button class="class-button" data-tab="sim3pma" onclick="showTab('sim3pma', this)">SIM3PMA</button>
-                <button class="class-button" data-tab="sim3pmb" onclick="showTab('sim3pmb', this)">SIM3PMB</button>
-                <button class="class-button" data-tab="sim3bi" onclick="showTab('sim3bi', this)">SIM3BI</button>
+                <button class="class-button concentration" data-tab="sim3pd" onclick="showTab('sim3pd', this)">SIM3PD<span class="concentration-badge">Konsentrasi S.I.M. Pendidikan</span></button>
+                <button class="class-button concentration" data-tab="sim3pma" onclick="showTab('sim3pma', this)">SIM3PMA<span class="concentration-badge">Konsentrasi S.I.M. Pemerintahan</span></button>
+                <button class="class-button concentration" data-tab="sim3pmb" onclick="showTab('sim3pmb', this)">SIM3PMB<span class="concentration-badge">Konsentrasi S.I.M. Pemerintahan</span></button>
+                <button class="class-button concentration" data-tab="sim3bi" onclick="showTab('sim3bi', this)">SIM3BI<span class="concentration-badge">Konsentrasi S.I.M. Bisnis</span></button>
             </div>
         </div>
     </div>
@@ -2089,6 +2129,7 @@
         function focusClassNavigation() {
             const nav = document.getElementById('classNavigation');
             if (nav) {
+                nav.classList.remove('has-selection');
                 nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
             setTimeout(() => {
@@ -2105,6 +2146,9 @@
                 selectedText.textContent = 'Jadwal aktif: ' + buttonElement.textContent.trim();
                 selectedBar.classList.add('visible');
             }
+
+            const navigation = document.getElementById('classNavigation');
+            if (navigation) navigation.classList.add('has-selection');
         }
 
         function showTab(tabId, buttonElement) {
@@ -2142,9 +2186,12 @@
             });
 
             setTimeout(() => {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const navigation = document.getElementById('classNavigation');
+                const navigationHeight = navigation ? navigation.getBoundingClientRect().height : 0;
+                const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: Math.max(0, targetTop - navigationHeight - 24),
+                    behavior: 'smooth'
                 });
             }, 150);
         }
