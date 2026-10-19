@@ -540,15 +540,96 @@
     }
 
     .class-button.no-data {
-        opacity: 0.58;
+        border-color: #f0c36d;
+        background: linear-gradient(180deg, #fffdf5 0%, #fff7df 100%);
+        color: #854d0e;
     }
 
     .class-button.no-data::after {
-        content: "Belum tersedia";
+        content: "☀ Libur Semester";
         display: block;
-        margin-top: 2px;
+        margin-top: 4px;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: #fef3c7;
+        color: #92400e;
         font-size: 0.58rem;
-        font-weight: 500;
+        line-height: 1.35;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .class-button.no-data:hover {
+        border-color: #d97706;
+        background: #fffbeb;
+        color: #78350f;
+    }
+
+    .class-button.no-data.active {
+        border-color: #b45309;
+        background: linear-gradient(135deg, #d97706, #92400e);
+        color: white;
+        box-shadow: 0 5px 14px rgba(180, 83, 9, 0.22);
+    }
+
+    .class-button.no-data.active::after {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .holiday-message {
+        grid-column: 1 / -1;
+        max-width: 760px;
+        width: 100%;
+        margin: 12px auto 24px;
+        padding: clamp(24px, 5vw, 42px);
+        text-align: center;
+        background: linear-gradient(145deg, #ffffff 0%, #fffbeb 100%);
+        border: 1px solid #fde68a;
+        border-radius: 20px;
+        box-shadow: 0 12px 32px rgba(146, 64, 14, 0.08);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .holiday-message::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 5px;
+        background: linear-gradient(90deg, #f59e0b, #fcd34d, #f59e0b);
+    }
+
+    .holiday-message .message-icon {
+        font-size: 2.8rem;
+        margin: 0 0 12px;
+    }
+
+    .holiday-message h3 {
+        margin: 0 0 12px;
+        color: #92400e;
+        font-size: clamp(1.25rem, 3vw, 1.7rem);
+        line-height: 1.35;
+    }
+
+    .holiday-status {
+        display: inline-block;
+        margin: 0 auto 14px;
+        padding: 6px 13px;
+        border-radius: 999px;
+        background: #fef3c7;
+        color: #92400e;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
+    .holiday-message p {
+        margin: 0 auto;
+        max-width: 560px;
+        color: #57534e;
+        font-size: 0.95rem;
+        line-height: 1.75;
     }
 
     .class-button.concentration {
@@ -1130,7 +1211,7 @@
             <div class="popup-info">
                 <h4>Kelas Tersedia:</h4>
                 <ul>
-                    <li>SIM1A, SIM1B = Kelas Semester 1 (NIM: 26996000**)</li>
+                    <li>SIM1B = Kelas Semester 1 (NIM: 26996000**)</li>
                     <li>SIM3A, SIM3B, SIM3PD, SIM3PMA, SIM3PMB, SIM3BI = Kelas Semester 3 (NIM: 25996000**)</li>
                 </ul>
             </div>
@@ -1215,8 +1296,8 @@
                 <span class="semester-nim">NIM 26996000**</span>
             </div>
             <div class="semester-buttons">
-                <button class="class-button" data-tab="sim1a" onclick="showTab('sim1a', this)">SIM1A</button>
-                <button class="class-button no-data" data-tab="sim1b" onclick="showTab('sim1b', this)">SIM1B</button>
+                <button class="class-button no-data" data-tab="sim1a" onclick="showTab('sim1a', this)">SIM1A</button>
+                <button class="class-button" data-tab="sim1b" onclick="showTab('sim1b', this)">SIM1B</button>
             </div>
         </div>
 
@@ -1257,27 +1338,39 @@
     </div>
     
     <div id="sim1a" class="tab-content">
+        <div class="schedule-cards">
+            <section class="holiday-message" role="status" aria-live="polite">
+                <div class="message-icon">🌤️</div>
+                <div class="holiday-status">LIBUR SEMESTER</div>
+                <h3>Perkuliahan Kelas SIM1A Sedang Libur</h3>
+                <p>Jadwal perkuliahan semester ini telah selesai. Perkuliahan semester berikutnya direncanakan dimulai pada bulan <strong>Maret 2027</strong>.</p>
+                <p>Selamat menikmati masa libur semester!</p>
+            </section>
+        </div>
+    </div>
+
+    <div id="sim1b" class="tab-content">
         <!-- Schedule Cards -->
         <div class="schedule-cards">
-            <!-- Card 1: Kamis - Warna Biru -->
-            <div class="schedule-card blue">
+            <!-- Card 3: Sabtu Sesi 1 - Warna Hijau -->
+            <div class="schedule-card teal">
                 <div class="card-header">
-                    <div class="card-day">Kamis</div>
+                    <div class="card-day">Rabu</div>
                     <div class="card-time">19.00 - 21.00</div>
                 </div>
-                <div class="card-title">Manajemen Sistem Informasi (MSI)</div>
-                <div class="card-code">[MSIM101]</div>
+                <div class="card-title">Manajemen Pelayanan Teknologi Informasi (MPTI)</div>
+                <div class="card-code">[MSIM104]</div>
                 <div class="card-info">
                     <div class="lecturer-info-container">
-                        <img src="kiswanto.png" alt="Foto Dosen" class="lecturer-photo">
+                        <img src="goenawan.png" alt="Foto Dosen" class="lecturer-photo">
                         <div class="lecturer-details">
                             <div class="card-info-item">
                                 <div class="icon">👨‍🏫</div>
-                                <div class="text">Dr. Ir. Kiswanto, S.T., M.Kom., IPM, APEC Eng.</div>
+                                <div class="text">Dr. Ir. Goenawan Brotosaputro, S.Kom., M.Sc.</div>
                             </div>
                             <div class="lecturer-email">
                                 <div class="icon">✉️</div>
-                                <div>kiswanto@atmaluhur.ac.id</div>
+                                <div>gbrotos@atmaluhur.ac.id</div>
                             </div>
                             <div class="card-info-item">
                                 <div class="icon">📚</div>
@@ -1293,36 +1386,34 @@
                 <div class="card-footer">
                     <div class="zoom-info">
                         <div class="zoom-details">
-                            ID: 998 4153 4654<br>
+                            ID: 927 3288 9724<br>
                             Passcode: semangatya
                         </div>
-                        <a href="https://zoom.us/j/99841534654?pwd=6LQlfu67RvFaDh0z8s9og9FO2OGmna.1" target="_blank" class="zoom-btn">
+                        <a href="https://zoom.us/j/92732889724?pwd=yunbbDiYV6dFHmC8jvAxXONAZS8Crb.1" target="_blank" class="zoom-btn">
                             <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
                             Join Zoom
                         </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Card 2: Jumat - Warna Ungu -->
-            <div class="schedule-card purple">
+            <div class="schedule-card blue">
                 <div class="card-header">
                     <div class="card-day">Jumat</div>
                     <div class="card-time">19.00 - 21.00</div>
                 </div>
-                <div class="card-title">Manajemen Pelayanan Teknologi Informasi (MPTI)</div>
-                <div class="card-code">[MSIM104]</div>
+                <div class="card-title">Manajemen Sistem Informasi (MSI)</div>
+                <div class="card-code">[MSIM101]</div>
                 <div class="card-info">
                     <div class="lecturer-info-container">
-                        <img src="helmud.jpeg" alt="Foto Dosen" class="lecturer-photo">
+                        <img src="krisna.png" alt="Foto Dosen" class="lecturer-photo">
                         <div class="lecturer-details">
                             <div class="card-info-item">
                                 <div class="icon">👨‍🏫</div>
-                                <div class="text">Dr. Ellya Helmud, S.Kom., M.Kom.</div>
+                                <div class="text">Krisna Adiyarta M., S.Kom., M.Sc., Ph.D.</div>
                             </div>
                             <div class="lecturer-email">
                                 <div class="icon">✉️</div>
-                                <div>ellyahelmud@atmaluhur.ac.id</div>
+                                <div>krisna@atmaluhur.ac.id</div>
                             </div>
                             <div class="card-info-item">
                                 <div class="icon">📚</div>
@@ -1348,12 +1439,53 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Card 3: Sabtu Sesi 1 - Warna Hijau -->
             <div class="schedule-card teal">
                 <div class="card-header">
                     <div class="card-day">Sabtu</div>
                     <div class="card-time">08.00 - 10.00</div>
+                </div>
+                <div class="card-title">Bisnis Intelijen dan Analisa (BIA)</div>
+                <div class="card-code">[MSIM105]</div>
+                <div class="card-info">
+                    <div class="lecturer-info-container">
+                        <img src="marshal.png" alt="Foto Dosen" class="lecturer-photo">
+                        <div class="lecturer-details">
+                            <div class="card-info-item">
+                                <div class="icon">👨‍🏫</div>
+                                <div class="text">Dr. Marshal Imar Pratama, S.E., M.M.</div>
+                            </div>
+                            <div class="lecturer-email">
+                                <div class="icon">✉️</div>
+                                <div>marshal@atmaluhur.ac.id</div>
+                            </div>
+                            <div class="card-info-item">
+                                <div class="icon">📚</div>
+                                <div class="text">3 SKS</div>
+                            </div>
+                            <div class="card-info-item">
+                                <div class="icon">📍</div>
+                                <div class="card-room">Ruang: Pasca 1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="zoom-info">
+                         <div class="zoom-details">
+                            ID: 980 1443 1731<br>
+                            Passcode: semangatya
+                        </div>
+                        <a href="https://zoom.us/j/98014431731?pwd=aXB920R1khfieXNFKqVsqQ4G9DnhcX.1" target="_blank" class="zoom-btn">
+                            <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
+                            Join Zoom
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-card teal">
+                <div class="card-header">
+                    <div class="card-day">Sabtu</div>
+                    <div class="card-time">10.30 - 12.30</div>
                 </div>
                 <div class="card-title">Manajemen Keuangan (MK)</div>
                 <div class="card-code">[MSIM102]</div>
@@ -1383,22 +1515,20 @@
                 <div class="card-footer">
                     <div class="zoom-info">
                         <div class="zoom-details">
-                            ID: 980 1443 1731<br>
+                            ID: 929 3959 8548<br>
                             Passcode: semangatya
                         </div>
-                        <a href="https://zoom.us/j/98014431731?pwd=aXB920R1khfieXNFKqVsqQ4G9DnhcX.1" target="_blank" class="zoom-btn">
+                        <a href="https://zoom.us/j/92939598548?pwd=JcCwe1bk6y16Z1J7Qb6xeAi7ev7lmc.1" target="_blank" class="zoom-btn">
                             <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
                             Join Zoom
                         </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Card 5: Sabtu Sesi 3 - Warna Pink -->
             <div class="schedule-card teal">
                 <div class="card-header">
                     <div class="card-day">Sabtu</div>
-                    <div class="card-time">10.30 - 12.30</div>
+                    <div class="card-time">13.30 - 15.30</div>
                 </div>
                 <div class="card-title">Pengembangan Strategi Bisnis (PSB)</div>
                 <div class="card-code">[MSIM103]</div>
@@ -1428,51 +1558,6 @@
                 <div class="card-footer">
                     <div class="zoom-info">
                         <div class="zoom-details">
-                            ID: 929 3959 8548<br>
-                            Passcode: semangatya
-                        </div>
-                        <a href="https://zoom.us/j/92939598548?pwd=JcCwe1bk6y16Z1J7Qb6xeAi7ev7lmc.1" target="_blank" class="zoom-btn">
-                            <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
-                            Join Zoom
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4: Sabtu Sesi 2 - Warna Orange -->
-            <div class="schedule-card teal">
-                <div class="card-header">
-                    <div class="card-day">Sabtu</div>
-                    <div class="card-time">13.30 - 15.30</div>
-                </div>
-                <div class="card-title">Bisnis Intelijen dan Analisa (BIA)</div>
-                <div class="card-code">[MSIM105]</div>
-                <div class="card-info">
-                    <div class="lecturer-info-container">
-                        <img src="amri.png" alt="Foto Dosen" class="lecturer-photo">
-                        <div class="lecturer-details">
-                            <div class="card-info-item">
-                                <div class="icon">👨‍🏫</div>
-                                <div class="text">Dr. Amri, S.E., M.M.</div>
-                            </div>
-                            <div class="lecturer-email">
-                                <div class="icon">✉️</div>
-                                <div>amri@atmaluhur.ac.id</div>
-                            </div>
-                            <div class="card-info-item">
-                                <div class="icon">📚</div>
-                                <div class="text">3 SKS</div>
-                            </div>
-                            <div class="card-info-item">
-                                <div class="icon">📍</div>
-                                <div class="card-room">Ruang: Pasca 1</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="zoom-info">
-                        <div class="zoom-details">
                             ID: 931 5879 0029<br>
                             Passcode: semangatya
                         </div>
@@ -1486,14 +1571,6 @@
         </div>
     </div>
 
-    <div id="sim1b" class="tab-content">
-        <div class="empty-schedule">
-            <div class="message-icon">📅</div>
-            <h3>Jadwal SIM1B Belum Tersedia</h3>
-            <p>Perkuliahan akan dimulai pada bulan Oktober 2026</p>
-        </div>
-    </div>
-
     <div id="sim3a" class="tab-content">
         <!-- Schedule Cards -->
         <div class="schedule-cards">
@@ -1501,7 +1578,7 @@
             <div class="schedule-card blue">
                 <div class="card-header">
                     <div class="card-day">Sabtu</div>
-                    <div class="card-time">15.30 - 17.30</div>
+                    <div class="card-time">13.30 - 15.30</div>
                 </div>
                 <div class="card-title">Seminar Usulan Proposal (SUP)</div>
                 <div class="card-code">[MSIM301]</div>
@@ -1523,7 +1600,7 @@
                             </div>
                             <div class="card-info-item">
                                 <div class="icon">📍</div>
-                                <div class="card-room">Ruang: Pasca 2</div>
+                                <div class="card-room">Ruang: Pasca 3</div>
                             </div>
                         </div>
                     </div>
@@ -1531,10 +1608,10 @@
                 <div class="card-footer">
                     <div class="zoom-info">
                         <div class="zoom-details">
-                            ID: 910 4610 1277<br>
+                            ID: 931 5879 0029<br>
                             Passcode: semangatya
                         </div>
-                        <a href="https://zoom.us/j/91046101277?pwd=uWXlTksEnWWAgbfY98aBUb1SLxQBXu.1" target="_blank" class="zoom-btn">
+                        <a href="https://zoom.us/j/93158790029?pwd=abaZ1gPRXkaI8Esbbtgun87aazGa1V.1" target="_blank" class="zoom-btn">
                             <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
                             Join Zoom
                         </a>
@@ -1686,6 +1763,50 @@
         <!-- Schedule Cards -->
         <div class="schedule-cards">
             <!-- Card 2: Jumat - Warna Ungu -->
+             <!-- Card 4: Sabtu Sesi 2 - Warna Orange -->
+            <div class="schedule-card teal">
+                <div class="card-header">
+                    <div class="card-day">Rabu</div>
+                    <div class="card-time">19.00 - 21.00</div>
+                </div>
+                <div class="card-title">Analisa Data Pendidikan (ADP)</div>
+                <div class="card-code">[MSIM308]</div>
+                <div class="card-info">
+                    <div class="lecturer-info-container">
+                        <img src="yulianti.png" alt="Foto Dosen" class="lecturer-photo">
+                        <div class="lecturer-details">
+                            <div class="card-info-item">
+                                <div class="icon">👨‍🏫</div>
+                                <div class="text">Dr. Yulianti, S.E., M.M.</div>
+                            </div>
+                            <div class="lecturer-email">
+                                <div class="icon">✉️</div>
+                                <div>yulianti@atmaluhur.ac.id</div>
+                            </div>
+                            <div class="card-info-item">
+                                <div class="icon">📚</div>
+                                <div class="text">3 SKS</div>
+                            </div>
+                            <div class="card-info-item">
+                                <div class="icon">📍</div>
+                                <div class="card-room">Ruang: Pasca 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="zoom-info">
+                        <div class="zoom-details">
+                            ID: 927 3288 9724<br>
+                            Passcode: semangatya
+                        </div>
+                        <a href="https://zoom.us/j/92732889724?pwd=yunbbDiYV6dFHmC8jvAxXONAZS8Crb.1" target="_blank" class="zoom-btn">
+                            <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
+                            Join Zoom
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="schedule-card purple">
                 <div class="card-header">
                     <div class="card-day">Jumat</div>
@@ -1723,51 +1844,6 @@
                             Passcode: semangatya
                         </div>
                         <a href="https://zoom.us/j/93016453464?pwd=iS33Z2zIejEpm0cwifC80hpRzbmCjE.1" target="_blank" class="zoom-btn">
-                            <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
-                            Join Zoom
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4: Sabtu Sesi 2 - Warna Orange -->
-            <div class="schedule-card teal">
-                <div class="card-header">
-                    <div class="card-day">Sabtu</div>
-                    <div class="card-time">13.30 - 15.30</div>
-                </div>
-                <div class="card-title">Analisa Data Pendidikan (ADP)</div>
-                <div class="card-code">[MSIM308]</div>
-                <div class="card-info">
-                    <div class="lecturer-info-container">
-                        <img src="yulianti.png" alt="Foto Dosen" class="lecturer-photo">
-                        <div class="lecturer-details">
-                            <div class="card-info-item">
-                                <div class="icon">👨‍🏫</div>
-                                <div class="text">Dr. Yulianti, S.E., M.M.</div>
-                            </div>
-                            <div class="lecturer-email">
-                                <div class="icon">✉️</div>
-                                <div>yulianti@atmaluhur.ac.id</div>
-                            </div>
-                            <div class="card-info-item">
-                                <div class="icon">📚</div>
-                                <div class="text">3 SKS</div>
-                            </div>
-                            <div class="card-info-item">
-                                <div class="icon">📍</div>
-                                <div class="card-room">Ruang: Pasca 3</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="zoom-info">
-                        <div class="zoom-details">
-                            ID: 931 5879 0029<br>
-                            Passcode: semangatya
-                        </div>
-                        <a href="https://zoom.us/j/93158790029?pwd=abaZ1gPRXkaI8Esbbtgun87aazGa1V.1" target="_blank" class="zoom-btn">
                             <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
                             Join Zoom
                         </a>
@@ -1826,8 +1902,8 @@
             <!-- Card 4: Sabtu Sesi 2 - Warna Orange -->
             <div class="schedule-card teal">
                 <div class="card-header">
-                    <div class="card-day">Sabtu</div>
-                    <div class="card-time">13.30 - 15.30</div>
+                    <div class="card-day">Jumat</div>
+                    <div class="card-time">19.00 - 21.00</div>
                 </div>
                 <div class="card-title">Penjaminan Kualitas Manajemen (PKM)</div>
                 <div class="card-code">[MSIM304]</div>
@@ -1849,7 +1925,7 @@
                             </div>
                             <div class="card-info-item">
                                 <div class="icon">📍</div>
-                                <div class="card-room">Ruang: Pasca 2</div>
+                                <div class="card-room">Ruang: Pasca 3</div>
                             </div>
                         </div>
                     </div>
@@ -1857,10 +1933,10 @@
                 <div class="card-footer">
                     <div class="zoom-info">
                         <div class="zoom-details">
-                            ID: 931 5879 0029<br>
+                            ID: 930 1645 3464<br>
                             Passcode: semangatya
                         </div>
-                        <a href="https://zoom.us/j/93158790029?pwd=abaZ1gPRXkaI8Esbbtgun87aazGa1V.1" target="_blank" class="zoom-btn">
+                        <a href="https://zoom.us/j/93016453464?pwd=iS33Z2zIejEpm0cwifC80hpRzbmCjE.1" target="_blank" class="zoom-btn">
                             <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
                             Join Zoom
                         </a>
@@ -1872,11 +1948,53 @@
     <div id="sim3pma" class="tab-content">
         <!-- Schedule Cards -->
         <div class="schedule-cards">
-            <!-- Card 2: Jumat - Warna Ungu -->
+            <div class="schedule-card teal">
+                <div class="card-header">
+                    <div class="card-day">Rabu</div>
+                    <div class="card-time">19.00 - 21.00</div>
+                </div>
+                <div class="card-title">Implementasi dan Integrasi Sistem (IIS)</div>
+                <div class="card-code">[MSIM306]</div>
+                <div class="card-info">
+                    <div class="lecturer-info-container">
+                        <img src="krisna.png" alt="Foto Dosen" class="lecturer-photo">
+                        <div class="lecturer-details">
+                            <div class="card-info-item">
+                                <div class="icon">👨‍🏫</div>
+                                <div class="text">Krisna Adiyarta M., S.Kom., M.Sc., Ph.D.</div>
+                            </div>
+                            <div class="lecturer-email">
+                                <div class="icon">✉️</div>
+                                <div>krisna@atmaluhur.ac.id</div>
+                            </div>
+                            <div class="card-info-item">
+                                <div class="icon">📚</div>
+                                <div class="text">3 SKS</div>
+                            </div>
+                            <div class="card-info-item">
+                                <div class="icon">📍</div>
+                                <div class="card-room">Ruang: Pasca 4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="zoom-info">
+                        <div class="zoom-details">
+                            ID: 927 3288 9724<br>
+                            Passcode: semangatya
+                        </div>
+                        <a href="https://zoom.us/j/92732889724?pwd=yunbbDiYV6dFHmC8jvAxXONAZS8Crb.1" target="_blank" class="zoom-btn">
+                            <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
+                            Join Zoom
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="schedule-card purple">
                 <div class="card-header">
-                    <div class="card-day">Jumat</div>
-                    <div class="card-time">19.00 - 21.00</div>
+                    <div class="card-day">Sabtu</div>
+                    <div class="card-time">08.00 - 10.00</div>
                 </div>
                 <div class="card-title">E-Governance dan Komunikasi Publik (EGKP)</div>
                 <div class="card-code">[MSIM305]</div>
@@ -1905,52 +2023,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="zoom-info">
-                        <div class="zoom-details">
-                            ID: 930 1645 3464<br>
-                            Passcode: semangatya
-                        </div>
-                        <a href="https://zoom.us/j/93016453464?pwd=iS33Z2zIejEpm0cwifC80hpRzbmCjE.1" target="_blank" class="zoom-btn">
-                            <img src="zoom_logo.png" alt="Zoom" class="zoom-icon">
-                            Join Zoom
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4: Sabtu Sesi 2 - Warna Orange -->
-            <div class="schedule-card teal">
-                <div class="card-header">
-                    <div class="card-day">Sabtu</div>
-                    <div class="card-time">08.00 - 10.00</div>
-                </div>
-                <div class="card-title">Implementasi dan Integrasi Sistem (IIS)</div>
-                <div class="card-code">[MSIM306]</div>
-                <div class="card-info">
-                    <div class="lecturer-info-container">
-                        <img src="krisna.png" alt="Foto Dosen" class="lecturer-photo">
-                        <div class="lecturer-details">
-                            <div class="card-info-item">
-                                <div class="icon">👨‍🏫</div>
-                                <div class="text">Krisna Adiyarta M., S.Kom., M.Sc., Ph.D.</div>
-                            </div>
-                            <div class="lecturer-email">
-                                <div class="icon">✉️</div>
-                                <div>krisna@atmaluhur.ac.id</div>
-                            </div>
-                            <div class="card-info-item">
-                                <div class="icon">📚</div>
-                                <div class="text">3 SKS</div>
-                            </div>
-                            <div class="card-info-item">
-                                <div class="icon">📍</div>
-                                <div class="card-room">Ruang: Pasca 3</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="zoom-info">
-                        <div class="zoom-details">
+                         <div class="zoom-details">
                             ID: 980 1443 1731<br>
                             Passcode: semangatya
                         </div>
